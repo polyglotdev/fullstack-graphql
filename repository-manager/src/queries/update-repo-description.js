@@ -1,23 +1,19 @@
-import { post } from 'superagent'
+import { useMutation, gql } from '@apollo/client'
 
-const UPDATE_DESCRIPTION_QUERY = `
-mutation updateDescription($repositoryId: ID!, $description: String!) {
-  updateRepository(input: {repositoryId: $repositoryId, description: $description}) {
-    repository {
-      id
-      description
+const UPDATE_DESCRIPTION_QUERY = gql`
+  mutation updateDescription($repositoryId: ID!, $description: String!) {
+    updateRepository(
+      input: { repositoryId: $repositoryId, description: $description }
+    ) {
+      repository {
+        id
+        description
+      }
     }
   }
-}`
+`
 
-const TOKEN = process.env.REACT_APP_GITHUB_TOKEN
-
-export const updateRepoDescription = (variables) =>
-  post('https://api.github.com/graphql')
-    .set({
-      Authorization: `Bearer ${TOKEN}`,
-    })
-    .send({
-      query: UPDATE_DESCRIPTION_QUERY,
-      variables,
-    })
+export const useUpdateRepoDescription = (variables = {}) =>
+  useMutation(UPDATE_DESCRIPTION_QUERY, {
+    variables,
+  })

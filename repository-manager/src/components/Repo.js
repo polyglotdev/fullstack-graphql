@@ -1,27 +1,20 @@
-import React, { useRef, useState } from 'react'
-import { updateRepoDescription } from '../queries/update-repo-description'
+import React, { useRef } from 'react'
+import { useUpdateRepoDescription } from '../queries/update-repo-description'
 
 export const Repo = ({ repo }) => {
   const inputRef = useRef(null)
-  const [isUpdating, setIsUpdating] = useState(false)
+  const [update, { loading: isUpdating }] = useUpdateRepoDescription()
 
   const submit = () => {
     const repositoryId = repo.id
     const description = inputRef.current.value
-    updateRepoDescription({ repositoryId, description })
-      .then(() => {
-        setIsUpdating(false)
-      })
-      .catch(() => {
-        setIsUpdating(false)
-        inputRef.current.value = repo.description
-      })
+    update({ variables: { repositoryId, description } })
   }
 
   return (
     <div key={repo.id}>
       <a href={repo.url}>{repo.nameWithOwner}</a>
-      <input type="text" ref={inputRef} defaultValue={repo.description} />
+      <input ref={inputRef} defaultValue={repo.description} />
       <button disabled={isUpdating} onClick={submit}>
         {' '}
         Submit{' '}
