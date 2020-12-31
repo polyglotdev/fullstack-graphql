@@ -1,0 +1,33 @@
+{
+  "name": "fullstack-graphql",
+  "version": "1.0.0",
+  "description": "fullstack graphql book from newline",
+  "main": "index.js",
+  "engineStrict": true,
+  "engines": {
+    "node": "10.19.0"
+  },
+  "dependencies": {
+    "semver": "^7.3.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "requirements-check": "node check_node_version.js",
+    "postinstall": "npm run requirements-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polyglotdev/fullstack-graphql.git"
+  },
+  "keywords": [
+    "graphql",
+    "react",
+    "typescript"
+  ],
+  "author": "polyglotdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polyglotdev/fullstack-graphql/issues"
+  },
+  "homepage": "https://github.com/polyglotdev/fullstack-graphql#readme"
+}
